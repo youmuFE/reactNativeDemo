@@ -17,7 +17,7 @@ class Header extends Component {
 			     backgroundColor='rgba(255, 255, 255, 0)'
 			     barStyle="light-content"
 			   />
-	          <Text style={styles.topText}>成都经销商</Text>
+	          <Text style={styles.topText}>{this.props.title}</Text>
 	        </View>
 	    )
    }

@@ -7,17 +7,20 @@ import {
   View,
 } from 'react-native'
 
-import Login from './Login.js'
 
+import Header from '../components/Header'
+import LoginBox from '../components/LoginBox'
+import Main from '../components/Main'
 
-class AppComponent extends Component {
+class Login extends Component {
    render() {
         
       return (
 	      <View style={styles.container}>
-	        <Header />
-	        <Main />
-	        <Footer />
+	        <Header title="登陆-五粮春销售服务端"/>
+	        <Main>
+            <LoginBox navigator={this.props.navigator}/>
+          </Main>
 	      </View>
 	    );
 	}
@@ -34,4 +37,4 @@ var styles = StyleSheet.create({
   },
 });
 
-export default AppComponent
+export default Login

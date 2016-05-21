@@ -7,16 +7,21 @@ import {
   View,
 } from 'react-native'
 
-import Login from './Login.js'
+import Header from '../components/Header'
+import Main from '../components/Main'
+import Content from '../components/Content'
+import Footer from '../components/Footer'
 
 
-class AppComponent extends Component {
+class Home extends Component {
    render() {
         
       return (
 	      <View style={styles.container}>
-	        <Header />
-	        <Main />
+	        <Header title="消息"/>
+	        <Main>
+            <Content />
+          </Main>
 	        <Footer />
 	      </View>
 	    );
@@ -34,4 +39,4 @@ var styles = StyleSheet.create({
   },
 });
 
-export default AppComponent
+export default Home

@@ -6,12 +6,12 @@ import {
 } from 'react-native';
 
 
-import App from './src/containers/App';
+import Login from './src/containers/Login';
 
 class rnDemo extends Component {
    render() {
-       let defaultName = 'indexPage';
-       let defaultComponent = App;
+       let defaultName = 'loginPage';
+       let defaultComponent = Login;
        return (
        <Navigator
          initialRoute={{ name: defaultName, component: defaultComponent }}
