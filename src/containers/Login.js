@@ -14,7 +14,7 @@ import Main from '../components/Main'
 
 class Login extends Component {
    render() {
-        
+        alert('1')
       return (
 	      <View style={styles.container}>
 	        <Header title="登陆-五粮春销售服务端"/>
@@ -34,6 +34,7 @@ var styles = StyleSheet.create({
     borderBottomColor: '#BBB',
     flex: 1,
     backgroundColor: '#F5FCFF',
+    backgroundColor: 'red',
   },
 });
 
