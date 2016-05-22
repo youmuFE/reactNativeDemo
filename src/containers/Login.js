@@ -14,7 +14,6 @@ import Main from '../components/Main'
 
 class Login extends Component {
    render() {
-        alert('1')
       return (
 	      <View style={styles.container}>
 	        <Header title="登陆-五粮春销售服务端"/>

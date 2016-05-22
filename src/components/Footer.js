@@ -8,34 +8,41 @@ import {
 
 class Footer extends Component {
 
-   handleClick(){
-    alert(1)
+    constructor(props) {
+       super(props);
+       this.arr = this.props.value;
+    }
+
+
+   handleClick(tabName){
+      this.props.handleClick(tabName)
    }
 
    render() {
-    console.log('-------------',this.props.navigator)
+      
       return (
         <View style={styles.bottom}>
-          <TouchableOpacity 
-              onPress={this.handleClick.bind(this)} 
-              activeOpacity={0.8}
-              style={styles.button}>
-            <Text style={styles.text}>消息</Text>
-          </TouchableOpacity>
-       		
-          <TouchableOpacity 
-              onPress={this.handleClick.bind(this)} 
-              activeOpacity={0.8}
-              style={styles.button}>
-            <Text style={styles.text,styles.textActive}>工作</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-              onPress={this.handleClick.bind(this)} 
-              activeOpacity={0.8}
-              style={styles.button}>
-            <Text style={styles.text}>我的</Text>
-          </TouchableOpacity>
+          {this.arr.map((item, index) => {
+            if(index === this.props.activeIndex){
+              return(<TouchableOpacity
+                        key={index}
+                        onPress={this.handleClick.bind(this,index)} 
+                        activeOpacity={0.8}
+                        style={styles.button}>
+                      <Text style={[styles.text, styles.textActive]}>{item}</Text>
+                    </TouchableOpacity>
+              )
+            }else{
+              return(<TouchableOpacity 
+                        key={index}
+                        onPress={this.handleClick.bind(this,index)} 
+                        activeOpacity={0.8}
+                        style={styles.button}>
+                      <Text style={styles.text}>{item}</Text>
+                    </TouchableOpacity>
+                )
+            }
+          })}
         </View>
       )
    }
