@@ -60,10 +60,10 @@ class Home extends Component {
     },
     */
     var curTab = componentsArr[tabIndex]
-    this.state  = {
+    this.setState ({
         curIndex : tabIndex,
         curName : curTab.name,
-    }
+    })
     //这里取到的路由竟然是Home本身,是由父组件传来的!! 坑爹啊,要么在render函数的
     //navigator的渲染方法内部调??
     // var routes = this.refs.nav.getCurrentRoutes()
@@ -78,17 +78,18 @@ class Home extends Component {
     
     //丑陋实现,不过效率不错
     this.refs.nav.jumpTo(componentsArr[tabIndex])
-    
+
    }
 
 
    render() {
+
       return (
 	      <View style={styles.container}>
 	        <Header title={tabArr[this.state.curIndex]}/>
 	        <Main>
             <Navigator
-              initialRoute={componentsArr[0]}
+              initialRoute={componentsArr[1]}
               initialRouteStack={componentsArr}
               ref="nav"
               configureScene={(route) => {

@@ -5,35 +5,75 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native'
 
-var MOCKED_MOVIES_DATA = [
-  {title: '标题', year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}},
-];
 
 class Work extends Component {
    render() {
-      var movie = MOCKED_MOVIES_DATA[0];
+
       return (
-     		<View style={styles.main}>
-          <View  style={styles.mainTop}>
-            <View style={styles.mainTopItem}>
+     		<View style={styles.wrap}>
+          <View  style={styles.top}>
+            <TouchableOpacity style={styles.item1}>
               <Image
-                source={{uri: movie.posters.thumbnail}}
-                style={styles.thumbnail}
+                source={{uri: 'http://i.imgur.com/UePbdph.jpg'}}
+                style={styles.item1_img}
                 />
-              <Text style={styles.textCenter}>待审批</Text>
-            </View>
-            <View style={styles.mainTopItem}>
+              <Text style={styles.item1_txt}>待审批</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item1}>
               <Image
-                source={{uri: movie.posters.thumbnail}}
-                style={styles.thumbnail}
+                source={{uri: 'http://i.imgur.com/UePbdph.jpg'}}
+                style={styles.item1_img}
                 />
-              <Text style={styles.textCenter}>已审批</Text>
-            </View>
+              <Text style={styles.item1_txt}>已审批</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.mainCenter}>
-            <Text>5个button</Text>
+          <View style={styles.main}>
+            <View style={styles.itemLine}>
+              <TouchableOpacity style={styles.item2}>
+                <Image
+                  source={{uri: 'http://i.imgur.com/UePbdph.jpg'}}
+                  style={styles.item2_img}
+                  />
+                <Text style={styles.item2_txt}>销售汇报</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.item2}>
+                <Image
+                  source={{uri: 'http://i.imgur.com/UePbdph.jpg'}}
+                  style={styles.item2_img}
+                  />
+                <Text style={styles.item2_txt}>销售汇报</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.item2}>
+                <Image
+                  source={{uri: 'http://i.imgur.com/UePbdph.jpg'}}
+                  style={styles.item2_img}
+                  />
+                <Text style={styles.item2_txt}>销售汇报</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.itemLine}>
+              <TouchableOpacity style={styles.item2}>
+                <Image
+                  source={{uri: 'http://i.imgur.com/UePbdph.jpg'}}
+                  style={styles.item2_img}
+                  />
+                <Text style={styles.item2_txt}>销售汇报</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.item2}>
+                <Image
+                  source={{uri: 'http://i.imgur.com/UePbdph.jpg'}}
+                  style={styles.item2_img}
+                  />
+                <Text style={styles.item2_txt}>销售汇报</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.item2}>
+                
+              </TouchableOpacity>
+
+            </View>
           </View>
         </View>
       )
@@ -41,30 +81,60 @@ class Work extends Component {
 }
 
 var styles = StyleSheet.create({
-    main : {
+    wrap : {
       flex : 1,
       backgroundColor: '#F0F0F2'
     },
-    mainTop : {
+    top : {
       backgroundColor : '#5288D9',
       flexDirection: 'row',
       justifyContent : 'space-between'
     },
-    mainTopItem : {
+    item1 : {
+      alignItems : 'center',
       margin : 20,
     },
-    thumbnail: {
+    item1_img: {
       borderWidth : 1,
       borderColor : 'green',
       width: 50,
       height: 50,
     },
-    textCenter : {
+    item1_txt : {
       // fontSize : 20,
       color : '#FFF',
       borderWidth : 1,
       borderColor : 'red',
-    }
+    },
+    main : {
+      flex:1,
+      backgroundColor : '#DDD',
+    },
+    itemLine : {
+      
+      height:100,
+      backgroundColor : '#F0F0F2',
+      flexDirection: 'row',
+      justifyContent : 'space-between'
+    },
+    item2 : {
+      flex : 1,
+      alignItems : 'center',
+      justifyContent : 'center',
+      padding: 20,
+      borderWidth : 1,
+      borderColor : '#DDD',
+    },
+    item2_img: {
+      borderWidth : 1,
+      borderColor : 'green',
+      width: 50,
+      height: 50,
+    },
+    item2_txt : {
+      marginTop: 5,
+      borderWidth : 1,
+    },
 })
 
 export default Work
