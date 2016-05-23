@@ -89,7 +89,7 @@ class Home extends Component {
 	        <Header title={tabArr[this.state.curIndex]}/>
 	        <Main>
             <Navigator
-              initialRoute={componentsArr[1]}
+              initialRoute={componentsArr[2]}
               initialRouteStack={componentsArr}
               ref="nav"
               configureScene={(route) => {

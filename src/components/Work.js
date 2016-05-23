@@ -83,7 +83,7 @@ class Work extends Component {
 var styles = StyleSheet.create({
     wrap : {
       flex : 1,
-      backgroundColor: '#F0F0F2'
+      backgroundColor : '#DDD',
     },
     top : {
       backgroundColor : '#5288D9',
@@ -106,12 +106,7 @@ var styles = StyleSheet.create({
       borderWidth : 1,
       borderColor : 'red',
     },
-    main : {
-      flex:1,
-      backgroundColor : '#DDD',
-    },
     itemLine : {
-      
       height:100,
       backgroundColor : '#F0F0F2',
       flexDirection: 'row',
