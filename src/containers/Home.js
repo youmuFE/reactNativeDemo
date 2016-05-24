@@ -86,7 +86,7 @@ class Home extends Component {
       return (
 	      <View style={styles.container}>
 	        <Header title={tabArr[this.state.curIndex]}/>
-	        <Main>
+	        <Main style={styles.main}>
             <Navigator
               initialRoute={componentsArr[0]}
               initialRouteStack={componentsArr}
@@ -118,8 +118,11 @@ var styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#BBB',
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#000',
   },
+  main : {
+    backgroundColor : '#FFF',
+  }
 });
 
-export default Home
+export default Home;

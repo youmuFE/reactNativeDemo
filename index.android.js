@@ -10,11 +10,12 @@ import {
 
 import Login from './src/containers/Login';
 import Home from './src/containers/Home';
+import WorkCircle from './src/components/WorkCircle';
 
 class rnDemo extends Component {
    render() {
-       let defaultName = 'loginPage';
-       let defaultComponent = Home;
+       let defaultName = 'WorkCircle';
+       let defaultComponent = WorkCircle;
        
        return ( 
            <Navigator
