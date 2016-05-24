@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-import Home from '../containers/Home'
+import Home from '../routes/Home'
 
 class LoginBox extends Component {
 

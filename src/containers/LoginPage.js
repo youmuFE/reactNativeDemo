@@ -10,16 +10,19 @@ import {
 
 import Header from '../components/Header'
 import LoginBox from '../components/LoginBox'
-import Main from '../components/Main'
 
 class Login extends Component {
+    constructor(props) {
+        super(props);
+    }
+
    render() {
       return (
 	      <View style={styles.container}>
 	        <Header title="登陆-五粮春销售服务端"/>
-	        <Main>
+	        <View style={styles.main}>
             <LoginBox navigator={this.props.navigator}/>
-          </Main>
+          </View>
 	      </View>
 	    );
 	}
@@ -35,6 +38,10 @@ var styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     backgroundColor: 'red',
   },
+  main : {
+    flex : 1,
+    backgroundColor: '#F0F0F2'
+  }
 });
 
 export default Login
