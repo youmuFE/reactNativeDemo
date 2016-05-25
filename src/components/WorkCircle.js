@@ -8,9 +8,11 @@ import {
   ListView,
   TouchableOpacity,
   StatusBar,
+  TextInput,
 } from 'react-native';
 
 import WorkCircleList from './WorkCircleList';
+import ReplyInput from './ReplyInput';
 
 var workCircleArr = [
 	{"portrait":"http://7xpy3m.com1.z0.glb.clouddn.com/go_back.png",'username' : '孙雪','content': [{'text':"呵呵哒"},[{"pirture":'http://7xpy3m.com1.z0.glb.clouddn.com/go_back.png'}]]}
@@ -19,11 +21,7 @@ class WorkCircle extends Component {
 	constructor(props){
 	  	super(props);
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-		this.state = {
-			dataSource: ds.cloneWithRows(workCircleArr);
-		};
 	}
-
 	render () {
 		return (
 			<View>
@@ -49,15 +47,11 @@ class WorkCircle extends Component {
 						<Image style={styles.selfPortrait} source={{uri : 'http://7xpy3m.com1.z0.glb.clouddn.com/20141202105822882.jpg'}} />
 						<Text style={styles.selfName}>他大舅</Text>
 					</View>
-					<ListView 
-						dataSource={this.state.dataSource}
-						renderRow={(rowData) => 
-							return <WorkCircleList dataRow={rowData} />
-						}
-					/>
+					<ReplyInput />
+					<WorkCircleList />
 				</View>
 			</View>
-		);
+		)
 	}
 };
 
@@ -66,6 +60,9 @@ var styles = StyleSheet.create({
 		flexDirection : 'row',
 		backgroundColor : '#ccc',
 		height : 50,
+	},
+	textInput : {
+		height : 100,
 	},
 	backLeft : {
 		width : 80,

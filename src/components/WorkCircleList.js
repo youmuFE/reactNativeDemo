@@ -1,83 +1,94 @@
+
 import React, {Component} from 'react';
 import {
-  AppRegistry,
-  Image,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  ListView,
   TouchableOpacity,
-  StatusBar,
+  View,
+  Image,
 } from 'react-native';
 
-class WorkCircleList extends Component {
-	constructor (props) {
-		super(props);
-	}
-	render () {
-		return (
-			<TouchableOpacity style={styles.list}>
-				<View style={styles.main}>
-				    <View style={styles.Left}>
-				       	<Image style={styles.leftImg} source={{uri:'http://7xpy3m.com1.z0.glb.clouddn.com/5c6defebjw8epti0r9noaj20xc0y1n0x.jpg'}}/>
-				   		<View style={styles.leftText}><Text style={{color:'#ffffff',textAlign : 'center'}}>3</Text></View>
-				   	</View>
-				    <View style={styles.Middle}>
-				       <Text>消息中心</Text>
-				       <Text>违规举报申请已通过</Text>
-				    </View>
-				    <View style={styles.right}>
-				    	<Text style={styles.rightText}>2016.05.18.15：30</Text>
-				    </View>
-				</View>
-			</TouchableOpacity>
-		);
-	}
-};
+var THUMBS = ['https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851549_767334479959628_274486868_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851561_767334496626293_1958532586_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851579_767334503292959_179092627_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851589_767334513292958_1747022277_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851563_767334559959620_1193692107_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851593_767334566626286_1953955109_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851591_767334523292957_797560749_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851567_767334529959623_843148472_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851548_767334489959627_794462220_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851575_767334539959622_441598241_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851573_767334549959621_534583464_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851583_767334573292952_1519550680_n.png'];
+THUMBS = THUMBS.concat(THUMBS); // double length of THUMBS
 
-export default MessageList;
+var createThumbRow = (uri, i) => <Thumb key={i} uri={uri} />;
+class WorkCircleList extends Component  {
+  constructor(props){
+      super(props);
+  }
+
+  render () {
+    var _scrollView: ScrollView;
+    return (
+      <View>
+        <ScrollView
+          ref={(scrollView) => { _scrollView = scrollView; }}
+          automaticallyAdjustContentInsets={false}
+          onScroll={() => { console.log('onScroll!'); }}
+          scrollEventThrottle={200}
+          style={styles.scrollView}>
+          {THUMBS.map(createThumbRow)}
+        </ScrollView>
+      </View>
+    );
+  }
+}
+
+class Thumb extends Component {
+  constructor(props){
+      super(props);
+  }
+   shouldComponentUpdate (nextProps, nextState) {
+     return false;
+   }
+
+   render () {
+     return (
+       <View style={styles.button}>
+         <Image style={styles.img} source={{uri:this.props.uri}} />
+       </View>
+     );
+   }
+}
 
 var styles = StyleSheet.create({
-	main :{
-		backgroundColor: '#FFF',
-      paddingLeft : 10,
-      height : 65,
-      borderStyle: 'solid',
-      borderTopWidth: 1,
-      borderTopColor: '#000',
-      flexDirection: 'row',
-	},
-	 Left : {
-      marginTop : 10,
-      width : 50,
-      height : 50,
-    },
-    leftImg : {
-      height : 50,
-      resizeMode: Image.resizeMode.stretch
-    },
-    leftText : {
-      justifyContent : 'center',
-      position  : 'absolute',
-      width : 15,
-      borderRadius : 10,
-      backgroundColor : '#ff0000',
-      height : 15,
-      right : -7,
-      top : -7,
-    },
-    list : {
-    	backgroundColor : '#FFF',
-    },
-    Middle : {
-    	marginLeft : 10,
-    	justifyContent : 'center',
-    },
-    right : {
-    	flex : 1,
-    	marginTop : 5,
-    },
-    rightText : {
-    	textAlign :'right',
-    },
-})
+  scrollView: {
+    backgroundColor: '#F0F0F2',
+    height : 460,
+  },
+  horizontalScrollView: {
+    height: 120,
+  },
+  containerPage: {
+    height: 50,
+    width: 50,
+    backgroundColor: '#527FE4',
+    padding: 5,
+  },
+  text: {
+    fontSize: 20,
+    color: '#888888',
+    left: 80,
+    top: 20,
+    height: 40,
+  },
+  button: {
+    margin: 7,
+    padding: 5,
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    borderRadius: 3,
+  },
+  buttonContents: {
+    flexDirection: 'row',
+    width: 64,
+    height: 64,
+  },
+  img: {
+    width: 64,
+    height: 64,
+  }
+});
+
+export default WorkCircleList;
