@@ -9,13 +9,14 @@ import {
 } from 'react-native'
 
 import LoginPage from '../containers/LoginPage'
+import Home from './Home'
 
 
 class AppComponent extends Component {
   // import Home from './Home'
    render() {
       let defaultName = 'loginPage';
-      let defaultComponent = LoginPage;
+      let defaultComponent = Home;
       return (
 	      <Navigator
              initialRoute={{ name: defaultName, component: defaultComponent }}

@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Waiting from './Waiting'
 
 class Work extends Component {
@@ -22,9 +21,8 @@ class Work extends Component {
     }
 
     changeTab(tabIndex){
-      var routes = this.props.navigator.getCurrentRoutes;
+      var routes = this.props.navigator.getCurrentRoutes();    
       this.props.navigator.jumpTo(routes[tabIndex])
-
      }
 
    render() {
@@ -96,24 +94,19 @@ class Work extends Component {
               </View>
             </View>
           </View>
-          <Footer value={['消息','工作','我的']}
-              activeIndex={1}
-              handleClick={this.changeTab.bind(this)}/>
         </View>
       )
    }
 }
 
 var styles = StyleSheet.create({
-    container: {
-      
+    container: {      
       flex: 1,
       backgroundColor: '#F5FCFF',
-      backgroundColor: 'red',
     },
     wrap : {
       flex : 1,
-      backgroundColor : '#DDD',
+      backgroundColor : '#F0F0F2',
     },
     top : {
       backgroundColor : '#5288D9',
