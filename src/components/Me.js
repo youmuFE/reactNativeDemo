@@ -23,7 +23,7 @@ class Me extends Component {
    render() {
       return (
         <View style={styles.container}>
-          <Header title="消息" />
+          
           <View style={styles.wrap}>
             <Avatar uri="http://i.imgur.com/UePbdph.jpg"
               name="孙雪"/>

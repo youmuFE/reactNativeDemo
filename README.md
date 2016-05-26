@@ -22,3 +22,17 @@
 
 ##注意
  * navigator的navigationBar有毒，背后用的是绝对定位，要做有动画的导航就写到渲染结果组件里，或渲染时返回一个嵌套组件 ``<View><Component navitagor={navigator}/></View>``  不需要做动画就做到路由的外面 ``<Header /><Navigator /><Footer />`` 最起码安卓4.4使用navigationBar的定位很痛苦
+
+ * 监听本组件中navigator中的事件
+``
+ componentDidMount(){
+     var curNav = this.refs.navi;
+
+     curNav.navigationContext.addListener('didfocus', (e) =>{
+         var index = componentsArr.indexOf(e.data.route)
+         this.setState({
+             tabIndex : index
+         })
+     })
+ }
+ ``

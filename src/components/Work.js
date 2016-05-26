@@ -26,10 +26,9 @@ class Work extends Component {
      }
 
    render() {
-
       return (
         <View style={styles.container}>
-          <Header title="工作"/>
+          
        		<View style={styles.wrap}>
             <View  style={styles.top}>
               <TouchableOpacity style={styles.item1} 

@@ -15,10 +15,11 @@ class Message extends Component {
     }
 
    render() {
+
       return (
      		<View style={styles.container}>
           <View style={styles.wrap}>
-            <Text>Message</Text>
+            <Text style={styles.word}>Message Page</Text>
           </View>
         </View>
       )
@@ -27,14 +28,18 @@ class Message extends Component {
 }
 
 var styles = StyleSheet.create({
+    word : {
+      fontSize:30,
+      color:'red'
+    },
     container: {      
       flex: 1,
-      borderWidth: 10,
-      borderColor: 'blue'
+      
+      backgroundColor: '#F9F'
     },
     wrap : {
       flex : 1,
-      backgroundColor : '#F0F0F2',
+      // backgroundColor : '#F0F0F2',
     },
 })
 

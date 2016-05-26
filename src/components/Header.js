@@ -25,13 +25,13 @@ class Header extends Component {
 
 var styles = StyleSheet.create({
 	top : {
-	    backgroundColor: '#F8F8F8',
+
+	    
 	    height: 50,
 	    justifyContent : 'center',
 	    alignItems : 'center',
 	    // borderStyle: 'solid',
-	    borderBottomWidth: 1,
-	    borderBottomColor: '#BBB',
+
 	    marginBottom: 2,
 	},
 	topText : {
