@@ -8,12 +8,10 @@ import {
   TextInput,
 } from 'react-native';
 
+import KeyboardSpace from './KeyboardSpacer';
 class ReplyInput extends Component {
 	constructor(props){
 	  	super(props);
-	}
-	handleChange(){
-		alert(this);
 	}
 	render(){
 		return (
@@ -22,12 +20,12 @@ class ReplyInput extends Component {
 					<TextInput
 					 style={styles.textInput} 
 					 multiline={true}
-					 onChange={this.handleChange.bind(this)}
 					 />
 				</View>
 				<View style={styles.sendBox}>
 					<Text style={styles.sendText}>发送</Text>
 				</View>
+				<KeyboardSpace />
 			</View>
 		);
 	}
@@ -35,17 +33,23 @@ class ReplyInput extends Component {
 
 var styles = StyleSheet.create({
 	buttonBox : {
-		overflow : 'hidden',
+		position : 'absolute',
 		flexDirection : 'row',
+		paddingLeft : 5,
+		paddingRight: 5,
+		left : 0,
+		right : 0,
+		bottom : 0,
 		borderTopWidth : 1,
 		borderTopColor : '#000',
 		borderStyle : 'solid',
-		paddingLeft : 5,
-		paddingRight: 5,
 		alignItems : 'center',
 	},
 	textInputWrap : {
 		flex : 8,
+	},
+	textInput : {
+		height : 48,
 	},
 	sendBox : {
 		flex : 2,

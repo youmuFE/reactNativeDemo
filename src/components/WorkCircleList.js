@@ -1,94 +1,192 @@
+'use strict';
 
-import React, {Component} from 'react';
-import {
+import React from 'react-native';
+const {
   ScrollView,
   StyleSheet,
+  RefreshControl,
   Text,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
-  Image,
-} from 'react-native';
+} = React;
 
-var THUMBS = ['https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851549_767334479959628_274486868_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851561_767334496626293_1958532586_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851579_767334503292959_179092627_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851589_767334513292958_1747022277_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851563_767334559959620_1193692107_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851593_767334566626286_1953955109_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851591_767334523292957_797560749_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851567_767334529959623_843148472_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851548_767334489959627_794462220_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851575_767334539959622_441598241_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/t39.1997/p128x128/851573_767334549959621_534583464_n.png', 'https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/t39.1997/p128x128/851583_767334573292952_1519550680_n.png'];
-THUMBS = THUMBS.concat(THUMBS); // double length of THUMBS
-
-var createThumbRow = (uri, i) => <Thumb key={i} uri={uri} />;
-class WorkCircleList extends Component  {
-  constructor(props){
-      super(props);
-  }
-
-  render () {
-    var _scrollView: ScrollView;
+const styles = StyleSheet.create({
+  row: {
+    borderColor: 'grey',
+    borderWidth: 1,
+    padding: 20,
+    backgroundColor: '#3a5795',
+    margin: 5,
+  },
+  text: {
+    alignSelf: 'center',
+    color: '#fff',
+  },
+  scrollview: {
+    height : 500,
+  },
+});
+//创建行组件
+const Row = React.createClass({
+  _onClick: function() {
+    this.props.onClick(this.props.data);
+  },
+  render: function() {
+    return (
+        <View style={styles.row}>
+          <Text style={styles.text}>
+            {this.props.data.text + ' (' + this.props.data.clicks + ' clicks)'}
+          </Text>
+        </View>
+    );
+  },
+});
+//创建行上边视图组件
+const RowTop = React.createClass({
+  render : function(){
     return (
       <View>
-        <ScrollView
-          ref={(scrollView) => { _scrollView = scrollView; }}
-          automaticallyAdjustContentInsets={false}
-          onScroll={() => { console.log('onScroll!'); }}
-          scrollEventThrottle={200}
-          style={styles.scrollView}>
-          {THUMBS.map(createThumbRow)}
-        </ScrollView>
+        <View><Image source={{uri:"null"}}/></View>
+        <View>
+          <Text>孙雪</Text>
+          <Text>2015.05.16 10:20</Text>
+        </View>
       </View>
     );
   }
-}
+});
 
-class Thumb extends Component {
-  constructor(props){
-      super(props);
-  }
-   shouldComponentUpdate (nextProps, nextState) {
-     return false;
-   }
-
-   render () {
-     return (
-       <View style={styles.button}>
-         <Image style={styles.img} source={{uri:this.props.uri}} />
-       </View>
-     );
-   }
-}
-
-var styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: '#F0F0F2',
-    height : 460,
-  },
-  horizontalScrollView: {
-    height: 120,
-  },
-  containerPage: {
-    height: 50,
-    width: 50,
-    backgroundColor: '#527FE4',
-    padding: 5,
-  },
-  text: {
-    fontSize: 20,
-    color: '#888888',
-    left: 80,
-    top: 20,
-    height: 40,
-  },
-  button: {
-    margin: 7,
-    padding: 5,
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-    borderRadius: 3,
-  },
-  buttonContents: {
-    flexDirection: 'row',
-    width: 64,
-    height: 64,
-  },
-  img: {
-    width: 64,
-    height: 64,
+//创建行内容部分
+const RowContent = React.createClass({
+  render : function() {
+    if(this.props.content.images.length !== 0){
+      const img =  this.props.content.images.map((uri, i) => {
+        return <Image source={{uri : uri}} />
+      });
+      return (
+          <View>
+            <View>
+              <Text>{this.props.content.text}</Text>
+            </View>
+            {img}
+          </View>
+        );
+    }
   }
 });
 
-export default WorkCircleList;
+//创建行下边组件部分
+const RowBottom = React.createClass({
+  render : function(){
+    return (
+        <View>
+          <View>
+            <Text>删除</Text>
+          </View>
+          <View>
+            <Image source={{uri : ''}} />
+          </View>
+          <View>
+            <Image source={{uri : ''}}/>
+          </View>
+        </View>
+      );
+  }
+});
+
+//创建行回复组件
+const RowReply = React.createClass({
+  render : function(){
+    const reply = this.props.content.reply.map((value, i) => {
+      return 
+    })
+    const praise = this.props.content.praise.map((value, i) => {
+        return <PraiseList key={i} data={value} />; 
+    })
+    return (
+        s
+      );
+  }
+});
+
+//点赞列表组件
+const PraiseList = React.createClass({
+  render : function(){
+    if(this.props.key == 0){
+      return <View><Text>{this.props.data}</Text></View>
+    } else{
+      return <View><Text>,</Text><Text>{this.props.data}</Text></View>
+    }
+  }
+});
+//回复列表组件
+const ReplyList = React.createClass({
+  render : function(){
+
+  }
+});
+const RefreshControlExample = React.createClass({
+  statics: {
+    title: '<RefreshControl>',
+    description: 'Adds pull-to-refresh support to a scrollview.'
+  },
+
+  getInitialState() {
+    return {
+      isRefreshing: false,
+      loaded: 0,
+      rowData: Array.from(new Array(20)).map(
+        (val, i) => ({text: 'Initial row' + i, clicks: 0})),
+    };
+  },
+
+  _onClick(row) {
+    row.clicks++;
+    this.setState({
+      rowData: this.state.rowData,
+    });
+  },
+
+  render() {
+    const rows = this.state.rowData.map((row, ii) => {
+      return <Row key={ii} data={row} onClick={this._onClick}/>;
+    });
+    return (
+      <ScrollView
+        style={styles.scrollview}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this._onRefresh}
+            tintColor="#ff0000"
+            title="Loading..."
+            colors={['#ff0000', '#00ff00', '#0000ff']}
+            progressBackgroundColor="#ffff00"
+          />
+        }>
+        {rows}
+      </ScrollView>
+    );
+  },
+
+  _onRefresh() {
+    this.setState({isRefreshing: true});
+    setTimeout(() => {
+      // prepend 10 items
+      const rowData = Array.from(new Array(10))
+      .map((val, i) => ({
+        text: 'Loaded row' + (+this.state.loaded + i),
+        clicks: 0,
+      }))
+      .concat(this.state.rowData);
+
+      this.setState({
+        loaded: this.state.loaded + 10,
+        isRefreshing: false,
+        rowData: rowData,
+      });
+    }, 5000);
+  },
+});
+
+export default RefreshControlExample;
