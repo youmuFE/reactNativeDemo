@@ -11,7 +11,7 @@ import {
 import Message from '../components/Message'
 import Work from '../components/Work'
 import Me from '../components/Me'
-import Footer from '../components/Footer'
+// import Footer from '../components/Footer'
 
 const componentsArr = [{
     'title': '消息',
@@ -26,21 +26,13 @@ const componentsArr = [{
 
 var styles = StyleSheet.create({
     container: {
-        flex: 1,        
-        backgroundColor: '#F5FCFF',
-    },
-    header : {
-        height: 49,
-        overflow: 'hidden',
-        flexDirection : 'row',
-        justifyContent: 'center',
-        backgroundColor: '#F8F8F8',
-        borderBottomWidth: 1,
-        borderBottomColor: '#BBB',
+        flex: 1,
+        // backgroundColor: 'blue'
+        // backgroundColor: '#F5FCFF',
     },
     wrap : {
         flex: 1,       
-        paddingTop:50,
+        paddingBottom:50,
         backgroundColor : '#F0F0F2',
         justifyContent: 'center',
         borderWidth: 20,
@@ -52,82 +44,61 @@ var styles = StyleSheet.create({
 const tabArr = ['消息', '工作', '我的']
 
 // 导航栏的Mapper
-var NavigationBarRouteMapper = {
-  // 左键
-  LeftButton(route, navigator, index, navState) {
-        if(route.index > 3)
-
-          return (
-            <View style={{
-                borderWidth: 2,
-                borderColor: 'red',
-                alignItems: 'center',
-                
-              }}>
-              <TouchableOpacity
-                style={{
-                    flex: 1,
-                    borderWidth: 2,
-                    borderColor: 'red'
-                }}>
-                <Text style={{
-                    flex: 1,
-                }}>
-                  left
-                </Text>
-              </TouchableOpacity>
-            </View>
-          );
-
-  },
-  // 右键
-  RightButton(route, navigator, index, navState) {
-
-      return (
-        <View style={{
-            flex:1,
-            alignItems:'center',
-          }}>
-          <TouchableOpacity>
-            <Text>
-                right
-            </Text>
+var routeMapper = {
+  // 左
+  Left(route, navigator, index, navState) {
+        var color = 'transparent'
+        if(route.title == '消息'){
+            color = 'blue'
+        }
+        return (
+          <TouchableOpacity style={{
+            flex: 1,
+            backgroundColor: color
+            // justifyContent: 'flex-end',
+          }}
+            onPress={() => navigator.jumpTo(route)}>
+            <Text>1</Text>
           </TouchableOpacity>
-        </View>
-      );
+        );
+
   },
-  // 标题
-  Title(route, navigator, index, navState) {
-    
-    return (
-      <View style={{
-        position:'absolute',
-        left: 50,
-        right: 50 + 72,
-        top:0,
-        bottom: 0,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-          <Text style={{
-            fontSize : 20,
-          }}>
-              {route.title}
-          </Text>
-      </View>
-    );
-  }
+  // 中
+  Center(route, navigator, index, navState) {
+    var color = 'transparent'
+        if(route.title == '工作'){
+            color = 'blue'
+        }
+        return (
+          <TouchableOpacity style={{
+            flex:1,
+            backgroundColor: color
+          }}
+          onPress={() => navigator.jumpTo(route)}>
+                <Text>2</Text>
+          </TouchableOpacity>
+        );
+  },
+  // 右
+  Right(route, navigator, index, navState) {
+var color = 'transparent'
+        if(route.title == '我的'){
+            color = 'blue'
+        }
+      return (
+        <TouchableOpacity style={{
+           flex:1,
+           backgroundColor: color
+        }}
+        onPress={() => navigator.jumpTo(route)}>
+            <Text>3</Text>
+        </TouchableOpacity>)
+  },
+  
 };
 
 
 class Home extends Component {
-
-    changeTab(tabIndex){
-        this.setState({
-            tabIndex : tabIndex
-        })
-        this.refs.navi.jumpTo(componentsArr[tabIndex])
-    }
 
     constructor(props) {
         super(props);
@@ -151,12 +122,15 @@ class Home extends Component {
                     ref='navi'
                     style={{
                         flex: 1,
+                        // justifyContent: 'center',
+                        backgroundColor:'#0F0'
                     }}
                     renderScene={
                         (route, navigator) => {
+                            // alert(route.title)
                             let Component=route.component;
                             return <View style={{
-                                        marginTop: 51,
+                                        marginBottom: 51,
                                         flex: 1
                                     }}>
                                 <Component {...route.params} navigator={navigator}/>
@@ -165,20 +139,18 @@ class Home extends Component {
                     }
                     navigationBar={
                         <Navigator.NavigationBar
-                            routeMapper={NavigationBarRouteMapper}
-                            style={styles.header}               
-                        />
+                            style={{
+                                backgroundColor:'yellow',
+                                height: 50,
+                                flexDirection: 'row'
+                            }}
+                            routeMapper={routeMapper}/>
                     }
                 />
-                <Footer value={tabArr}
-                      activeIndex={this.state.tabIndex}
-                      handleClick={this.changeTab.bind(this)}/>
+                
             </View>
         );
     }
-
-    
-    
 }
 
 export default Home

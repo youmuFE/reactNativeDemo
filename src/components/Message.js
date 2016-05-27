@@ -15,7 +15,6 @@ class Message extends Component {
     }
 
    render() {
-
       return (
      		<View style={styles.container}>
           <View style={styles.wrap}>
@@ -35,7 +34,7 @@ var styles = StyleSheet.create({
     container: {      
       flex: 1,
       
-      backgroundColor: '#F9F'
+      // backgroundColor: '#F9F'
     },
     wrap : {
       flex : 1,

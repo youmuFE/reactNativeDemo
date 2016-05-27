@@ -18,21 +18,43 @@ import Me from '../components/Me'
 var styles = StyleSheet.create({
     container: {
         flex: 1,        
-        backgroundColor: '#F5FCFF',
-        marginTop: 51,
+        // backgroundColor: '#F5FCFF',
+        backgroundColor: 'yellow',
+        marginTop:53,
+        // marginBottom: 100,
+        // position:'absolute',
+        // top:51,
+        // bottom: 51,
+        // left:0,
+        // right:20
     },
     header : {
-        height: 49,
-        overflow: 'hidden',
-        flexDirection : 'row',
-        justifyContent: 'center',
-        backgroundColor: '#F8F8F8',
-        borderBottomWidth: 1,
-        borderBottomColor: '#BBB',
+        // position:'absolute',
+        
+        // top: 0,
+        // bottom: 0,
+        // left: 0,
+        // right: 0,
+        // // overflow: 'hidden',
+        // flexDirection : 'row',
+        // justifyContent: 'center',
+        // backgroundColor: 'green',
+
+        // borderWidth: 4,
+        // borderColor: 'green',
+        // backgroundColor: '#F8F8F8',
+        // alignItems: 'center',
+        // backgroundColor: '#fff',
+        // borderBottomColor: '#eee',
+        // borderColor: 'transparent',
+        // borderWidth: 1,
+        // justifyContent: 'center',
+        // height: 44,
+        // flexDirection: 'row'
     },
     wrap : {
         flex: 1,       
-        paddingTop:50,
+        
         backgroundColor : '#F0F0F2',
         justifyContent: 'center',
         borderWidth: 20,
@@ -40,19 +62,6 @@ var styles = StyleSheet.create({
     }
 
 })
-
-const tabArr = ['消息', '工作', '我的']
-
-const componentsArr = [{
-    'title': '消息',
-    'component': Message,
-}, {
-    'title': '工作',
-    'component': Work,
-}, {
-    'title': '我的',
-    'component': Me,
-}]
 
 class AppComponent extends Component {
     constructor(){
@@ -63,22 +72,7 @@ class AppComponent extends Component {
       }
     }
 
-    showFooter(index){
-      console.log(this.state.tabIndex, index)
-      if(!this.state.showFooter || this.state.tabIndex != index){
-        this.setState({
-          tabIndex: index,
-          showFooter : true
-        })  
-      }
-    }
-    hideFooter(){
-     if(this.state.showFooter){
-        this.setState({
-          showFooter : false
-        })  
-      } 
-    }
+
 
     changeTab(tabIndex){
       this.setState({
@@ -93,52 +87,53 @@ class AppComponent extends Component {
 
    render() {
       let defaultName = 'loginPage';
-      let defaultComponent = Message;
+      let initialRoute = {
+          title: '消息',
+          component: Home
+      };
       
       return (
-        <View style={{ flex : 1}}>
-  	      <Navigator style={{ flex: 1 ,backgroundColor: 'red'}}
-               initialRoute={componentsArr[0]}
-               initialRouteStack={componentsArr}
+        
+  	      <Navigator style={{flex: 1 ,backgroundColor: 'red'}}
+               initialRoute={initialRoute}
                configureScene={(route) => {
                  return Navigator.SceneConfigs.HorizontalSwipeJump;
                }}
                ref='nav'
                renderScene={(route, navigator) => {
-                  // let title = route.title;
-                  console.log(navigator.getCurrentRoutes())
-                  let index = navigator.getCurrentRoutes().indexOf(route)
-                  if(index >=0 && index <=2){
-                    this.showFooter(index);
-                  }else{
-                    this.hideFooter();
-                  }
-
-                  // if(title == '消息' || title == '工作' || title == '我1的'){
-                    
-                  // }else{
-                    
-                  // }
+                  
+                  console.log('father: ',navigator.getCurrentRoutes())
                   let Component = route.component
-                   return <View style={styles.container}>
+                   return (<View style={styles.container}>
                        <Component {...route.params} navigator={navigator}/>
-                   </View>
+                   </View>)
                }}
                navigationBar={
-                   <Navigator.NavigationBar
-                       routeMapper={NavigationBarRouteMapper}
-                       style={styles.header}               
-                   />
+                <Navigator.NavigationBar
+                    routeMapper={NavigationBarRouteMapper}
+                    style={{
+                        alignItems: 'center',
+                        backgroundColor: '#fff',
+                        borderBottomColor: '#eee',
+                        borderColor: 'transparent',
+                        borderWidth: 1,
+                        justifyContent: 'center',
+                        height: 44,
+                        flexDirection: 'row',
+                        backgroundColor: '#666',
+                        
+                    }}               
+                />
+                        
                } />
-          {this.state.showFooter ? <Footer value={tabArr}
-                  activeIndex={this.state.tabIndex}
-                  handleClick={this.changeTab.bind(this)}
-                  /> : null}
-        </View>
+
 	    );
 	}
 }
-
+// <Navigator.NavigationBar
+//                        routeMapper={NavigationBarRouteMapper}
+//                        style={styles.header}               
+//                    />
 // 导航栏的Mapper
 var NavigationBarRouteMapper = {
   // 左键
@@ -207,5 +202,21 @@ var NavigationBarRouteMapper = {
       }
 };
 
-
 export default AppComponent
+
+    // showFooter(index){
+    //   console.log(this.state.tabIndex, index)
+    //   if(!this.state.showFooter || this.state.tabIndex != index){
+    //     this.setState({
+    //       tabIndex: index,
+    //       showFooter : true
+    //     })  
+    //   }
+    // }
+    // hideFooter(){
+    //  if(this.state.showFooter){
+    //     this.setState({
+    //       showFooter : false
+    //     })  
+    //   } 
+    // }
